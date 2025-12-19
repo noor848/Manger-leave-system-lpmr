@@ -211,3 +211,45 @@ def available_tools():
         {"name": "view_my_requests", "description": "View my leave requests"},
         {"name": "department_summary", "description": "Get department summary"}
     ]
+
+# ========== DEMO SETUP ==========
+def setup_demo_data():
+    """Setup demo data for testing"""
+    # Add demo employees
+    register_employee("EMP001", "John Doe", "john@company.com", "Engineering")
+    register_employee("EMP002", "Jane Smith", "jane@company.com", "HR")
+    register_employee("EMP003", "Bob Wilson", "bob@company.com", "Sales")
+    
+    # Add some leave requests
+    request_leave("EMP001", "2024-12-20", "2024-12-22", "Annual", "Family vacation")
+    request_leave("EMP002", "2024-12-25", "2024-12-27", "Sick", "Medical appointment")
+    
+    # Approve one
+    if leave_requests:
+        approve_leave(leave_requests[0]["request_id"], "Admin")
+
+# ========== RUN SERVER ==========
+if __name__ == "__main__":
+    # Setup demo data
+    setup_demo_data()
+    
+    print("="*60)
+    print("🏢 LEAVE MANAGEMENT SYSTEM")
+    print("="*60)
+    print(f"📊 Total Employees: {len(employees)}")
+    print(f"📋 Total Leave Requests: {len(leave_requests)}")
+    print("\n🛠️ Available Tools:")
+    print("  • register_employee(id, name, email, department)")
+    print("  • request_leave(employee_id, start_date, end_date, type, reason)")
+    print("  • approve_leave(request_id, approver_id)")
+    print("  • check_balance(employee_id)")
+    print("  • view_my_requests(employee_id)")
+    print("  • department_summary(department)")
+    print("\n📦 Demo Employees:")
+    for emp_id, emp in employees.items():
+        print(f"   - {emp['name']} ({emp_id}): {leave_balance.get(emp_id, 0)} days left")
+    
+    print("\n🚀 Starting MCP Server...")
+    print("="*60)
+    
+    mcp.run()
