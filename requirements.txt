@@ -1,0 +1,7 @@
+fastmcp
+chromadb
+sentence-transformers
+langchain
+langchain-community
+python-dotenv
+pydantic
